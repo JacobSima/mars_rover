@@ -23,8 +23,9 @@ class Message():
     msg       = ''
     space     = ''
     morning   = (1,2,3,4,5,6,7,8,9,10,11)
-    Afternoon = (12,13,14,15,16,17,18)
-    night     = (20,21,22,23,24)
+    Afternoon = (12,13,14,15,16,17)
+    evening   = (18,19,20)
+    night     = (21,22,23,24)
     
     # Logic of the greeting statement
     if dt_now.hour in morning:
@@ -35,7 +36,11 @@ class Message():
     elif dt_now.hour in night:
       msg   = 'Good Night'
       space = '    '
-    
+    elif dt_now.hour in evening:
+      msg   = 'Good Evening'
+      space = '  '
+
+
     # Clean the screen, just like typing clear on CMD
     os.system('clear')
 
