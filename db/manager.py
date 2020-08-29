@@ -1,6 +1,3 @@
-# Import core or third-party libraries
-import os
-
 # Import Custom module
 from db  import data
 
@@ -34,7 +31,8 @@ class Manager():
     for rover in rovers:
       output += '%d %d %s\n' % (rover[0], rover[1], rover[2]) 
       
-    os.system('clear')
+    print('\n')
+    print('\n')
     print(output)
 
 
@@ -215,30 +213,6 @@ class Manager():
 
 
 
-
-
-
-
-
-
-
-# manger = Manager()
-# print(manger.get_rovers())
-
-  # Get Single rover
-  # def get_single_rover(self,id):
-
-  #   try:
-  #     rover_id = int(id)
-  #     if len(data.rovers) > 0 and rover_id <= len(data.rovers) :
-  #       rover    = data.rovers[rover_id]
-  #       position = (rover[0],rover[1])   # (x,y)
-  #       heading  = rover[2]    # N
-  #       return position, heading
-  #     else:
-  #       raise Exception('IndexError or rovers list Empty')    
-  #   except :
-  #     raise Exception ('The Id not an integer value or rovers length not evaluable')
 
 
 
