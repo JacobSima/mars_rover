@@ -1,3 +1,6 @@
+# Import Core or Third-party library
+import time,os
+
 # Import Custom module
 from db  import data
 
@@ -31,8 +34,8 @@ class Manager():
     for rover in rovers:
       output += '%d %d %s\n' % (rover[0], rover[1], rover[2]) 
       
-    print('\n')
-    print('\n')
+    # Clean the screen, just like typing clear on CMD
+    os.system('clear')
     print(output)
 
 
@@ -164,6 +167,9 @@ class Manager():
     if self.check_position(position):
       # Update Rover in the plateau
       self.update_rover(updated_rover,rover_id)
+      print('Rover is moving to this coordinates',updated_rover)
+      time.sleep(data.command_delay)
+      print('Rover movement completed')
       return updated_rover,True
     else:
       print('Move can not be executed for this rover: ',updated_rover)
@@ -175,17 +181,22 @@ class Manager():
     rovers   = self.get_rovers()
     commands = self.get_commands()
     # The most tricky part, this rover return value is very important
-    for i,(rover,command) in enumerate(zip(rovers,commands)):
+    for i,(rover,command) in enumerate(zip(rovers,commands)):     
       for serie in command:
         if serie == 'L':
-          rover = self.rotate_l(rover,i)
+          print(rover,' is getting rotated to the left...')
+          rover = self.rotate_l(rover,i)         
+          time.sleep(data.command_delay)
+          print(rover,' Rotation completed')
 
         if serie == 'R':
+          print(rover,' is getting rotated to the right...')
           rover = self.rotate_r(rover,i)
+          time.sleep(data.command_delay)
+          print(rover,' Rotation completed')
 
         if serie == 'M':
-          rover,cnt = self.move_rover(rover,i)
-          
+          rover,cnt = self.move_rover(rover,i)       
           # if the rover cannot be move, then break the loop to check next rover
           if not cnt :
             break

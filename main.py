@@ -50,6 +50,10 @@ def main():
   # Get user approval
   inputText.user_appv()
 
+  # Run The display or Graphic program
+  # Use subprocessor or multi thread in python,let s get the graphic program working first
+  # by itself.
+
   # Run command of series
   db_mananger.run_commands()
 
@@ -62,3 +66,6 @@ def main():
 
 if __name__ == "__main__":
   main()
+# E.g: 5 5
+# E.g: 1 2 N or 3 3 E
+# E.g: LMLMLMLMM or MMRMMRMRRM
