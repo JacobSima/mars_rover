@@ -1,12 +1,15 @@
 # Import Core or Third-party library
-import os,sys
+import os,sys,time
+import concurrent.futures
+from subprocess import Popen, CREATE_NEW_CONSOLE
 
 # Import Custom library
-from db                              import data,manager     
-from lib                             import alert                                          
+from db                              import data,manager  
+  
+                                         
 
 # Define all paths of the programs
-paths = [os.path.join(os.getcwd(),'lib'),os.path.join(os.getcwd(),'tests'),os.path.join(os.getcwd(),'db')]
+paths = [os.path.join(os.getcwd(),'lib'),os.path.join(os.getcwd(),'tests'),os.path.join(os.getcwd(),'db'),os.path.join(os.getcwd(),'img')]
 for pather in paths:
   if pather not in sys.path:
     sys.path.append(pather)
@@ -50,22 +53,24 @@ def main():
   # Get user approval
   inputText.user_appv()
 
-  # Run The display or Graphic program
-  # Use subprocessor or multi thread in python,let s get the graphic program working first
-  # by itself.
+  # Use the Thread module to run both scripts
+  with concurrent.futures.ThreadPoolExecutor() as executor: 
+    # To continue with the script
+    executor.submit(db_mananger.continue_rover_code())
 
-  # Run command of series
-  db_mananger.run_commands()
+    # To Run the graphic tool, pygame
+    # executor.submit(Popen('cmd', creationflags=CREATE_NEW_CONSOLE))
+    
+    
 
-  # Print out the result
-  db_mananger.get_rov_final()
 
-  # Quit the program
-  alert.quiting(5,True)
+  
 
 
 if __name__ == "__main__":
   main()
+
+  
 # E.g: 5 5
 # E.g: 1 2 N or 3 3 E
 # E.g: LMLMLMLMM or MMRMMRMRRM

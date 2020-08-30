@@ -2,7 +2,8 @@
 import time,os
 
 # Import Custom module
-from db  import data
+from db   import data
+from lib  import alert 
 
 # Manger your Rover right here
 class Manager():
@@ -49,6 +50,17 @@ class Manager():
   def set_rovers(self,x,y,heading):
     data.rovers.append(tuple((x,y,heading)))
   
+  # Set Image base on the heading
+  def set_img(self,heading):
+    if heading == 'E':
+      data.imgs.append('img/E_R.png')
+    if heading == 'N':
+      data.imgs.append('img/N_R.png')
+    if heading == 'W':
+      data.imgs.append('img/W_R.png')
+    if heading == 'S':
+      data.imgs.append('img/S_R.png') 
+  
 
   # Check rover inside the grid
   # (x,y)
@@ -94,6 +106,7 @@ class Manager():
     rover_pos = (position[0],position[1])
     if self.check_position(rover_pos):
       self.set_rovers(position[0],position[1],heading)
+      self.set_img(heading)
       return True
     else:
       return False
@@ -200,7 +213,17 @@ class Manager():
           # if the rover cannot be move, then break the loop to check next rover
           if not cnt :
             break
+  
+  def continue_rover_code(self):
+    
+    # Run command of series
+    self.run_commands()
 
+    # Print out the result
+    self.get_rov_final()
+
+    # Quit the program
+    # alert.quiting(5,True)
 
 
   
